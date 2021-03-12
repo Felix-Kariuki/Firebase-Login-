@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome To Aviators Hub"
+        android:textColor="@color/colorAccent"
+        android:textSize="25sp"
+        android:fontFamily="cursive"
+        android:layout_gravity="center"
+        android:layout_marginTop="85dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvUser_id"
+        android:textSize="20sp"
+        android:text="1222222222"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvEmail_id"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="cursive"
+        android:text="1skdjsindns@gmail.com"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+
+        />
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        android:background="@drawable/bg_button"
+        android:textColor="@color/white"
+        android:text="Log Out"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        app:backgroundTint="@color/colorButton"/>
+
+
+
+
+</LinearLayout>
