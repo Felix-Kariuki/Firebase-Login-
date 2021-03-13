@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome To Aviators Hub"
+        android:text="@string/welcome_to_aviators_hub"
         android:textColor="@color/colorAccent"
         android:textSize="25sp"
         android:fontFamily="cursive"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvUser_id"
         android:textSize="20sp"
-        android:text="1222222222"
+        android:text=""
         android:textColor="@color/colorAccent"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
@@ -35,7 +35,7 @@
         android:textSize="20sp"
         android:textColor="@color/colorAccent"
         android:fontFamily="cursive"
-        android:text="1skdjsindns@gmail.com"
+        android:text=""
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
 
@@ -46,7 +46,7 @@
         android:layout_height="35dp"
         android:background="@drawable/bg_button"
         android:textColor="@color/white"
-        android:text="Log Out"
+        android:text="@string/log_out"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         app:backgroundTint="@color/colorButton"/>
