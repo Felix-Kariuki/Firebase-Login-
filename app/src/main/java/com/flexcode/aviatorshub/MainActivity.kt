@@ -14,21 +14,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val userId = intent.getStringExtra("userId")
+        //getting extra intent from registered user details
+        /*val userId = intent.getStringExtra("userId")
         val emailId = intent.getStringExtra("emailId")
 
 
 
         tvUser_id.text = "UserId :: $userId"
-        tvEmail_id.text = "EmailId :: $emailId"
+        tvEmail_id.text = "EmailId :: $emailId"*/
 
-        btnLogOut.setOnClickListener( View.OnClickListener {
+
+        btnLogOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             finish()
         }
-        )
+
 
     }
 }

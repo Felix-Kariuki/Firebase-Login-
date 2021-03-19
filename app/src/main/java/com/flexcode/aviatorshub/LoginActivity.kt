@@ -22,11 +22,23 @@ class LoginActivity : AppCompatActivity() {
 
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
-
+        //REGISTER PAGE INTENT
         tvRegister.setOnClickListener(View.OnClickListener {
             val registerPage = Intent(this@LoginActivity,RegistrationActivity::class.java)
             startActivity(registerPage)
         })
+
+        //INTENT FOR FORGOT PASSWORD
+        tvResetPassword.setOnClickListener {
+            val intent =   Intent(this@LoginActivity,ForgotPassword::class.java)
+            startActivity(intent)
+        }
+
+        //Login the user if already has an account
+        if (FirebaseAuth.getInstance().currentUser != null){
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            finish()
+        }
 
         //validating user login details
         btnLogin.setOnClickListener(View.OnClickListener {
@@ -35,19 +47,11 @@ class LoginActivity : AppCompatActivity() {
             val password = etPassword.text.toString().trim()
 
             if (TextUtils.isEmpty(email)) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Please Enter your Email!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@LoginActivity, "Please Enter your Email!", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
             if (TextUtils.isEmpty(password)) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Please Enter your Password!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@LoginActivity,"Please Enter your Password!", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
 
@@ -58,28 +62,20 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
                     //if task is successful
                     if (task.isSuccessful) {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "You are logged in successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@LoginActivity, "You are logged in successfully", Toast.LENGTH_SHORT).show()
 
                         //Intent for main activity after successful log in
-                        val logIn =
-                            Intent(this@LoginActivity, MainActivity::class.java)
-                        logIn.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        val logIn = Intent(this@LoginActivity, MainActivity::class.java)
+                        // To remove the extra layers when we move to ...... -> end of code more description
+                        /*intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK//various activities to also close app when user clicks back
+                        //sending user data through put extra
                         logIn.putExtra("userId",FirebaseAuth.getInstance().currentUser!!.uid)
-                        logIn.putExtra("emailId", email)
+                        logIn.putExtra("emailId", email)*/
                         startActivity(logIn)
                         finish()
                     } else {
                         //unsuccessful login
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Error!" + task.exception!!.message.toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@LoginActivity, task.exception!!.message.toString(), Toast.LENGTH_SHORT).show()
 
                         progressBar.visibility = View.GONE
                     }
