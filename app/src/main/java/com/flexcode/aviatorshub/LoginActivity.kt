@@ -1,24 +1,84 @@
 package com.flexcode.aviatorshub
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.util.Patterns
 import android.view.View
-import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.etPassword
 import kotlinx.android.synthetic.main.activity_registration.*
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
+
+    //private var CallbackManager callbackManager
+    lateinit var callbackManager: CallbackManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        //call back for facebook login
+        callbackManager = CallbackManager.Factory.create()
+
+
+        //facebook login
+        login_button.setPermissions(listOf("user_gender","public_profile",
+            "email"))
+        // If you are using in a fragment, call loginButton.setFragment(this);
+        // Callback registration
+        // If you are using in a fragment, call loginButton.setFragment(this);
+        // Callback registration
+
+
+        // Callback registration
+
+        // Callback registration
+        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
+            override fun onSuccess(loginResult: LoginResult?) {
+                // App code
+                Log.d("demo","login successful")
+            }
+
+            override fun onCancel() {
+                // App code
+                Log.d("demo","login unsuccessful")
+
+            }
+
+            override fun onError(exception: FacebookException) {
+                // App code
+                Log.d("demo","login error")
+
+            }
+        })
+
+
+        //register callback
+        /*login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult>?) {
+            override fun OnSuccess(loginResult: LoginResult?) {
+
+            }
+             override fun onCancel() {
+
+             }
+            override fun onError(exception: FacebookException){
+
+            }
+        }*/
+
 
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
@@ -49,6 +109,11 @@ class LoginActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this@LoginActivity, "Please Enter your Email!", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
+            }
+            if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                return@OnClickListener
+            } else {
+                etUsername.error = "Invalid Email"
             }
             if (TextUtils.isEmpty(password)) {
                 Toast.makeText(this@LoginActivity,"Please Enter your Password!", Toast.LENGTH_SHORT).show()
@@ -81,5 +146,15 @@ class LoginActivity : AppCompatActivity() {
                     }
                 })
         })
+    }
+    //passing the login results
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 }

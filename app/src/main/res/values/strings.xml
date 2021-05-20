@@ -15,4 +15,12 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">Login</string>
     <string name="submit">Submit</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="post">Post</string>
+    <string name="chats">Chats</string>
+
+    <string name="facebook_app_id">431493334593187</string>
+    <string name="fb_login_protocol_scheme">fb431493334593187</string>
+
 </resources>

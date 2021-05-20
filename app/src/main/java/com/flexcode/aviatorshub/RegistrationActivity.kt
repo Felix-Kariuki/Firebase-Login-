@@ -88,10 +88,7 @@ class RegistrationActivity : AppCompatActivity() {
                                     val firebaseUser: FirebaseUser = task.result!!.user!!
 
                                     Toast.makeText(
-                                            this@RegistrationActivity,
-                                            "Registration successful",
-                                            Toast.LENGTH_SHORT
-                                    ).show()
+                                            this@RegistrationActivity, "Registration successful", Toast.LENGTH_SHORT).show()
 
                                     /*Intent to Send the user to main activity after successful registration
                                     * in other words login the user that has been registered */
@@ -105,10 +102,7 @@ class RegistrationActivity : AppCompatActivity() {
                                 } else {
                                     //when the registration is unsuccessful
                                     Toast.makeText(
-                                            this@RegistrationActivity,
-                                            "Error!" + task.exception!!.message.toString(),
-                                            Toast.LENGTH_SHORT
-                                    ).show()
+                                            this@RegistrationActivity, "Error!" + task.exception!!.message.toString(), Toast.LENGTH_SHORT).show()
                                     progressBar.visibility = View.GONE
                                 }
                             }
