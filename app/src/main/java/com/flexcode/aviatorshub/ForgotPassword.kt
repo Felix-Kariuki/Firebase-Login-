@@ -5,25 +5,29 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import com.flexcode.aviatorshub.databinding.ActivityForgotPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_forgot_password.*
 import java.util.regex.Pattern
 
 class ForgotPassword : AppCompatActivity() {
+
+    private lateinit var binding:ActivityForgotPasswordBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgot_password)
+        binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //INTENT FOR BACK BUTTON TO LOGIN
-        ivBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             val back = Intent(this@ForgotPassword,MainActivity::class.java)
             startActivity(back)
             onBackPressed()
         }
 
         //forgot password firebase
-        btnSubmit.setOnClickListener {
-            val email: String = etEmail.text.toString().trim()
+        binding.btnSubmit.setOnClickListener {
+            val email: String = binding.etEmail.text.toString().trim()
             if (email.isEmpty()){
                 Toast.makeText(this@ForgotPassword,
                 "Please Enter Email!",

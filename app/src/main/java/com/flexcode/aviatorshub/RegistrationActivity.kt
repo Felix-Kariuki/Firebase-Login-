@@ -6,23 +6,24 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.flexcode.aviatorshub.databinding.ActivityRegistrationBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_registration.*
-import kotlinx.android.synthetic.main.activity_registration.etPassword
-import kotlinx.android.synthetic.main.activity_registration.progressBar
 
 class RegistrationActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityRegistrationBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
+        binding = ActivityRegistrationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
 
-        tvLogin.setOnClickListener(View.OnClickListener {
+        binding.tvLogin.setOnClickListener(View.OnClickListener {
             val login = Intent(this, LoginActivity::class.java)
             startActivity(login)
             onBackPressed()
@@ -31,6 +32,13 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         //event listener for the register button
+        val btnRegister = binding.btnRegister
+        val etPassword = binding.etPassword
+        val etConfirmPassword = binding.etConfirmPassword
+        val etPhone = binding.etPhone
+        val etFullName = binding.etFullName
+        val etEmail = binding.etEmail
+
         btnRegister.setOnClickListener(View.OnClickListener {
             //reading the user details and converting to string
             val password = etPassword.text.toString().trim()
@@ -74,7 +82,7 @@ class RegistrationActivity : AppCompatActivity() {
             }
 
             //SHOWING THE PROGRESS BAR WHEN EVALUATING INPUT
-            progressBar.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
 
             //Creating firebase auth instance and register email and password
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
@@ -103,7 +111,7 @@ class RegistrationActivity : AppCompatActivity() {
                                     //when the registration is unsuccessful
                                     Toast.makeText(
                                             this@RegistrationActivity, "Error!" + task.exception!!.message.toString(), Toast.LENGTH_SHORT).show()
-                                    progressBar.visibility = View.GONE
+                                    binding.progressBar.visibility = View.GONE
                                 }
                             }
                     )

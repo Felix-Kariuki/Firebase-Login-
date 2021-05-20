@@ -9,33 +9,35 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
+import com.facebook.*
 import com.facebook.login.LoginResult
+import com.flexcode.aviatorshub.databinding.ActivityLoginBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.etPassword
-import kotlinx.android.synthetic.main.activity_registration.*
+import org.json.JSONException
 import java.util.*
+
 
 class LoginActivity : AppCompatActivity() {
 
     //private var CallbackManager callbackManager
     lateinit var callbackManager: CallbackManager
+    lateinit var graphRequest: GraphRequest
+
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //call back for facebook login
         callbackManager = CallbackManager.Factory.create()
 
 
         //facebook login
-        login_button.setPermissions(listOf("user_gender","public_profile",
+        binding.loginButton.setPermissions(listOf("user_gender","public_profile",
             "email"))
         // If you are using in a fragment, call loginButton.setFragment(this);
         // Callback registration
@@ -46,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
         // Callback registration
 
         // Callback registration
-        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
+        binding.loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
             override fun onSuccess(loginResult: LoginResult?) {
                 // App code
                 Log.d("demo","login successful")
@@ -83,13 +85,13 @@ class LoginActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         //REGISTER PAGE INTENT
-        tvRegister.setOnClickListener(View.OnClickListener {
+        binding.tvRegister.setOnClickListener(View.OnClickListener {
             val registerPage = Intent(this@LoginActivity,RegistrationActivity::class.java)
             startActivity(registerPage)
         })
 
         //INTENT FOR FORGOT PASSWORD
-        tvResetPassword.setOnClickListener {
+        binding.tvResetPassword.setOnClickListener {
             val intent =   Intent(this@LoginActivity,ForgotPassword::class.java)
             startActivity(intent)
         }
@@ -101,10 +103,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //validating user login details
-        btnLogin.setOnClickListener(View.OnClickListener {
+        binding.btnLogin.setOnClickListener(View.OnClickListener {
             //reading the user details and converting to string
-            val email = etUsername.text.toString().trim()
-            val password = etPassword.text.toString().trim()
+            val email = binding.etUsername.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this@LoginActivity, "Please Enter your Email!", Toast.LENGTH_SHORT).show()
@@ -113,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 return@OnClickListener
             } else {
-                etUsername.error = "Invalid Email"
+                binding.etUsername.error = "Invalid Email"
             }
             if (TextUtils.isEmpty(password)) {
                 Toast.makeText(this@LoginActivity,"Please Enter your Password!", Toast.LENGTH_SHORT).show()
@@ -156,5 +158,14 @@ class LoginActivity : AppCompatActivity() {
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)
+
+
+
+        /*graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+            GraphRequest.GraphJSONObjectCallback()){
+            override fun onCompleted(JSONObject objects, GraphResponse){
+
+            }
+        }*/
     }
 }
