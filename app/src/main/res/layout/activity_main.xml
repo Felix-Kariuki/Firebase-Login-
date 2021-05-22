@@ -9,6 +9,7 @@
 
 
     <TextView
+        android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,19 +18,21 @@
         android:layout_marginLeft="105dp"
         android:text="@string/welcome_to_aviators_hub"
         android:textColor="@color/colorAccent"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:layout_marginStart="105dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvUser_id"
         android:textSize="20sp"
-        android:text=""
+        android:text="1111"
+        android:layout_marginStart="105dp"
+        android:layout_below="@+id/tvWelcome"
         android:textColor="@color/colorAccent"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-
-        />
+        android:layout_marginLeft="105dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,11 +40,13 @@
         android:textSize="20sp"
         android:textColor="@color/colorAccent"
         android:fontFamily="cursive"
-        android:text=""
+        android:text="11111111"
+        android:layout_marginStart="105dp"
+        android:layout_below="@id/tvUser_id"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
 
-        />
+        android:layout_marginLeft="105dp" />
 
     <Button
         android:id="@+id/btnLogOut"
@@ -54,6 +59,39 @@
         android:text="@string/log_out"
         android:textColor="@color/white"
         app:backgroundTint="@color/colorButton" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/ivFbPhoto"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="facebook photo"
+        android:layout_below="@+id/tvEmail_id"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvFbName"
+        android:textSize="20sp"
+        android:text="1111"
+        android:layout_marginStart="105dp"
+        android:layout_below="@+id/ivFbPhoto"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="105dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvFbEmail"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="cursive"
+        android:text="11111111"
+        android:layout_marginStart="105dp"
+        android:layout_below="@id/tvFbName"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="105dp" />
 
 
 </RelativeLayout>

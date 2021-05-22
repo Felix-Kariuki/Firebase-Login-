@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.facebook.*
 import com.facebook.login.LoginResult
 import com.flexcode.aviatorshub.databinding.ActivityLoginBinding
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 
 
@@ -23,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
     //private var CallbackManager callbackManager
     lateinit var callbackManager: CallbackManager
-    lateinit var graphRequest: GraphRequest
+    //lateinit var graphRequest: GraphRequest
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -52,6 +54,12 @@ class LoginActivity : AppCompatActivity() {
             override fun onSuccess(loginResult: LoginResult?) {
                 // App code
                 Log.d("demo","login successful")
+                val logIn = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(logIn)
+
+                val graphRequest = GraphRequest.newMeRequest(loginResult?.accessToken){
+                    `object` ,response -> getFacebookData(`object`)
+                }
             }
 
             override fun onCancel() {
@@ -149,8 +157,20 @@ class LoginActivity : AppCompatActivity() {
                 })
         })
     }
+
+    private fun getFacebookData(jsonObject: JSONObject?) {
+        val profilePic = "https://graph.facebook.com/${jsonObject?.getString("id")}"
+
+
+    }
+
     //passing the login results
-    override fun onActivityResult(
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode,resultCode,data)
+    }
+
+    /*override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
         data: Intent?
@@ -161,11 +181,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        /*graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
-            GraphRequest.GraphJSONObjectCallback()){
-            override fun onCompleted(JSONObject objects, GraphResponse){
 
-            }
-        }*/
-    }
+    }*/
 }
