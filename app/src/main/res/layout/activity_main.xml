@@ -92,6 +92,30 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="105dp" />
+    <com.mukesh.OtpView
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:inputType="number"
+        android:itemBackground="#BCBCBC"
+        android:focusableInTouchMode="true"
+        app:OtpItemCount="6"
+        app:OtpLineColor="#0068EB"
+        android:layout_below="@id/tvFbEmail"
+        app:OtpViewType="line" />
+    <Button
+        android:id="@+id/btnContinue"
+        android:text="Continue"
+        android:textStyle="bold|normal"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:backgroundTint="#0169EC"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/otp_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </RelativeLayout>
