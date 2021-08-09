@@ -9,14 +9,10 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.facebook.*
 import com.facebook.login.LoginResult
 import com.flexcode.aviatorshub.databinding.ActivityLoginBinding
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
@@ -24,7 +20,7 @@ import java.util.*
 class LoginActivity : AppCompatActivity() {
 
     //private var CallbackManager callbackManager
-    lateinit var callbackManager: CallbackManager
+    private lateinit var callbackManager: CallbackManager
     //lateinit var graphRequest: GraphRequest
 
     private lateinit var binding: ActivityLoginBinding
@@ -93,10 +89,10 @@ class LoginActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         //REGISTER PAGE INTENT
-        binding.tvRegister.setOnClickListener(View.OnClickListener {
-            val registerPage = Intent(this@LoginActivity,RegistrationActivity::class.java)
+        binding.tvRegister.setOnClickListener {
+            val registerPage = Intent(this@LoginActivity, RegistrationActivity::class.java)
             startActivity(registerPage)
-        })
+        }
 
         //INTENT FOR FORGOT PASSWORD
         binding.tvResetPassword.setOnClickListener {
@@ -134,13 +130,17 @@ class LoginActivity : AppCompatActivity() {
 
             //Firebase login using user email and password
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
+                .addOnCompleteListener { task ->
                     //if task is successful
                     if (task.isSuccessful) {
-                        Toast.makeText(this@LoginActivity, "You are logged in successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "You are logged in successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         //Intent for main activity after successful log in
-                        val logIn = Intent(this@LoginActivity, MainActivity::class.java)
+                        val logIn = Intent(this@LoginActivity, VerificationActivity::class.java)
                         // To remove the extra layers when we move to ...... -> end of code more description
                         /*intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK//various activities to also close app when user clicks back
                         //sending user data through put extra
@@ -150,11 +150,15 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     } else {
                         //unsuccessful login
-                        Toast.makeText(this@LoginActivity, task.exception!!.message.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            task.exception!!.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         progressBar.visibility = View.GONE
                     }
-                })
+                }
         })
     }
 

@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/editNumber"
+                android:id="@+id/etPhoneNumber"
                 android:hint="Type your Phone Number"
                 android:padding="10dp"
                 android:ems="1"
@@ -85,12 +85,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
-                android:id="@+id/continueBtn"
+                android:id="@+id/btnContinue"
                 android:text="Continue"
                 android:textStyle="bold|normal"
                 android:textSize="16sp"
                 android:textAllCaps="false"
-                app:backgroundTint="#228C27"
+                app:backgroundTint="@color/colorButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
